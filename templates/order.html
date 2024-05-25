@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block 'content' %}
+{% load static %}
+
+
+
+<div class="containers m-0">
+  <!-- Cart start -->
+  <div class="row m-0">
+    <div class="col-md-9 my-2">
+      <h5 class="bg-danger">Customer Details</h5>
+      <p><strong>Email: {{email}}</strong></p>
+      <h5 class="bg-danger">Order Details</h5>
+      <div class="row m-0">
+        {% for prod in products %}
+        <div class="col-md-4">
+          <img src="{{prod.pid.pimage.url}}" alt="" class="img-fluid" />
+        </div>
+        <div class="col-md-8">
+          <p><strong>Name: {{prod.pid.name}}</strong></p>
+          <p><strong>Price: {{prod.pid.price}}</strong></p>
+          <p><strong>Category: {{prod.pid.category}}</strong></p>
+          <p><strong>Product Details: {{prod.pid.pdetails}}</strong></p>
+          <p><strong>Quantity:- {{prod.quantity}}</strong></p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-3">
+      <h5 class="bg-danger">Total Amount</h5>
+      <p><strong>Total ({{np}} items): Rs. {{sum}} </strong></p>
+      <a href="/pay"><button class="btn btn-danger">Make Payment</button></a>
+      
+    </div>
+  </div>
+  <!-- cart end -->
+</div>
+
+{% endblock 'content' %}

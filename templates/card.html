@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block 'content' %}
+{% load static %}
+
+<div class="containers">
+      <!-- Cart start -->
+      <div class="row m-0">
+        
+        <div class="col-md-9">
+            <h5 class="bg-danger">Customer Details</h5> 
+            <p><strong>Email: abc@gmail.com</strong></p>
+           
+            <h5 class="bg-danger">Cart Details</h5>
+            <div class="row m-0">
+                {% for p in products %}
+                <div class="col-md-4 my-3">
+                    <img src="{{p.pid.pimage.url}}" alt="" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <p><strong>Name: {{p.pid.name}}</strong></p>
+                    <p><strong>Price: {{p.pid.price}}</strong></p>
+                    <p><strong>Category: 
+                        {% if p.pid.category == 1 %}
+                        Mobile
+                        {% elif p.pid.category == 2 %}
+                        Clothes
+                        {% else %}
+                        Shoes
+                        {% endif %}
+                    </strong></p>
+                    <p><strong>Product Details: {{p.pid.pdetails}}</strong></p>
+                    <p><strong>Quantity</strong></p>    
+                    <a href="/updateqty/{{p.id}}/0"><button class="btn btn-danger">-</button> </a>
+                    <input type="number" value="{{p.quantity}}">
+                    <a href="/updateqty/{{p.id}}/1"><button class="btn btn-success">+</button></a>
+                    <a href="/remove/{{p.id}}"> <button class="btn btn-danger">Remove</button> </a>
+            
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <h5 class="bg-danger">Total Amount</h5>
+            <p><strong>Total ({{np}} items): Rs. {{sum}} </strong></p>
+            <a href="/placeorder/"><button class="btn btn-danger">Place Order</button></a>
+        </div>
+        
+      </div>
+      <!-- cart end -->
+    </div>
+
+    {% endblock 'content' %}
